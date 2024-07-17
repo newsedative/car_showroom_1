@@ -1,5 +1,3 @@
-virtualvenv
-db.sqlite3
 # Logs
 logs
 *.log
