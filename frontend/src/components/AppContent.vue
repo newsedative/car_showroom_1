@@ -3,16 +3,18 @@ import CreateForm from "@/components/CreateForm.vue";
 import CarsList from "@/components/CarsList.vue";
 import MDialog from "@/components/UI/MDialog.vue";
 import MButton from "@/components/UI/MButton.vue";
+import MSelecter from "@/components/UI/MSelecter.vue";
 
 export default {
   name: "AppContent",
-  components: {MButton, MDialog, CreateForm, CarsList},
+  components: {MSelecter, MButton, MDialog, CreateForm, CarsList},
   data() {
     return {
       cars: [
         {id: 1, brand: "Mazda", model: '6 III GJ', mileage: 35000, year: 2023},
       ],
       dlgShowOrNot: false,
+      SelectedSort: '',
     }
   },
   methods: {
@@ -24,13 +26,25 @@ export default {
       this.dlgShowOrNot = true
     }
   },
+  computed: {
+    SortedCars() {
+      let newCars;
+      newCars = [...this.cars];
+      console.log(this.SelectedSort);
+    }
+  }
 }
 </script>
 
 <template>
   <div>
-    <div class="x-content">
-      <m-button @click="dlgShow" style="padding: 2%; align-self: flex-end">Добавить</m-button>
+    <div class="m-content">
+      <div style="padding-top: 20px">
+        <m-button @click="dlgShow" style="padding: 2%; align-self: flex-end">Добавить</m-button>
+      </div>
+      <div style="padding-top: 20px">
+        <m-selecter v-model="SelectedSort" ></m-selecter>
+      </div>
       <m-dialog v-model:show="dlgShowOrNot">
         <create-form @create="createCar"></create-form>
       </m-dialog>
@@ -41,5 +55,7 @@ export default {
 </template>
 
 <style scoped>
-
+  .m-content {
+    margin: 30px;
+  }
 </style>

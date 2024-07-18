@@ -37,9 +37,9 @@
   <div>
     <form class="m-form" @submit.prevent>
       <h3>Добавить автомобиль</h3>
-      <m-input v-model="car.brand" placeholder="Бренд"></m-input>
-      <m-input v-model="car.model" placeholder="Модель"></m-input>
-      <m-input v-model="car.mileage" placeholder="Пробег"></m-input>
+      <m-input v-model.trim="car.brand" placeholder="Бренд"></m-input>
+      <m-input v-model.trim="car.model" placeholder="Модель"></m-input>
+      <m-input v-model.number="car.mileage" placeholder="Пробег"></m-input>
       <m-input v-model="car.year" placeholder="Год выпуска"></m-input>
       <m-btn @click="createCar" style="padding: 2%; align-self: flex-end">Добавить</m-btn>
     </form>
