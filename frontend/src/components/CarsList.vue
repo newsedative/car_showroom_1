@@ -31,7 +31,7 @@ export default {
           <td>Year</td>
           <td>Action</td>
         </tr>
-        <tr class="car" v-for="(car, index) in cars" :key="index">
+        <tr class="car" v-for="(car, index) in cars" :key="car.id">
           <td>{{ car.id }}</td>
           <td>{{ car.brand }}</td>
           <td>{{ car.model }}</td>

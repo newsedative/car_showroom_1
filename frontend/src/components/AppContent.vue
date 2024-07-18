@@ -16,8 +16,7 @@ export default {
     createCar(data) {
       console.log(data)
       this.cars.push(data)
-    },
-
+    }
   }
 }
 </script>
@@ -26,7 +25,7 @@ export default {
   <div>
     <div class="x-content">
       <create-form @create="createCar"></create-form>
-      <cars-list :cars="cars"></cars-list>
+      <cars-list :cars="cars" @remove="deleteCar"></cars-list>
     </div>
   </div>
 
