@@ -1,10 +1,11 @@
 <script>
+  import MBtn from "@/components/UI/MButton.vue";
+  import MInput from "@/components/UI/MInput.vue";
 
-    import MBtn from "@/components/UI/MButton.vue";
 
     export default {
       name: "CreateForm",
-      components: {MBtn},
+      components: {MInput, MBtn},
       data() {
         return {
           car: {
@@ -36,10 +37,10 @@
   <div>
     <form class="m-form" @submit.prevent>
       <h3>Добавить автомобиль</h3>
-      <input v-model="car.brand" type="text" placeholder="Бренд" class="m-input">
-      <input v-model="car.model" type="text" placeholder="Модель" class="m-input">
-      <input v-model="car.mileage" type="text" placeholder="Пробег" class="m-input">
-      <input v-model="car.year" type="text" placeholder="Год выпуска" class="m-input">
+      <m-input v-model="car.brand" placeholder="Бренд"></m-input>
+      <m-input v-model="car.model" placeholder="Модель"></m-input>
+      <m-input v-model="car.mileage" placeholder="Пробег"></m-input>
+      <m-input v-model="car.year" placeholder="Год выпуска"></m-input>
       <m-btn @click="createCar" style="padding: 2%; align-self: flex-end">Добавить</m-btn>
     </form>
   </div>
@@ -56,21 +57,5 @@
       flex-direction: column;
       color: #191919;
     }
-
-    .m-input {
-      height: 25px;
-      padding: 5px;
-      margin-bottom: 10px;
-      border: 1px solid #bdbdbd;
-      font-size: 16px;
-      border-radius: 0.25rem;
-      outline: 0;
-    }
-
-    .m-input:focus {
-      border-color: #bdbdbd;
-      box-shadow: 0 0 0 0.1rem #D05353;
-    }
-
 
 </style>
