@@ -5,13 +5,13 @@
 </script>
 
 <template>
-  <div class="x-header">
+  <div class="m-header">
     <strong class="header-text">Машинова Дарья</strong>
   </div>
 </template>
 
 <style scoped>
-    .x-header {
+    .m-header {
       padding: 10px;
       display: flex;
       justify-content: space-between;

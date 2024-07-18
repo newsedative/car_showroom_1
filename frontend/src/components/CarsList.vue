@@ -1,18 +1,27 @@
 <script>
+
+import MBtn from "@/components/UI/MButton.vue";
+
 export default {
+  components: {MBtn},
   props: {
     cars: {
       type: Array,
       required: true
     }
   },
-  name: "CarsList"
+  name: "CarsList",
+  methods: {
+    deleteCar(index) {
+      this.cars.splice(index, 1)
+    }
+  }
 }
 </script>
 
 <template>
   <div>
-    <div class="x-item">
+    <div class="m-item">
       <table class="tabel-c">
         <tr>
           <td>ID</td>
@@ -20,13 +29,15 @@ export default {
           <td>Model</td>
           <td>Mileage</td>
           <td>Year</td>
+          <td>Action</td>
         </tr>
-        <tr class="car" v-for="car in cars">
+        <tr class="car" v-for="(car, index) in cars" :key="index">
           <td>{{ car.id }}</td>
           <td>{{ car.brand }}</td>
           <td>{{ car.model }}</td>
           <td>{{ car.mileage }}</td>
           <td>{{ car.year }}</td>
+          <td><m-btn @click="deleteCar(index)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-btn></td>
         </tr>
       </table>
     </div>
@@ -35,7 +46,7 @@ export default {
 
 <style scoped>
 
-.x-item {
+.m-item {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 10px;
@@ -46,7 +57,7 @@ export default {
   color: #191919;
 }
 
-.x-item p {
+.m-item p {
   margin-top: 5px;
   margin-bottom: 5px;
 }

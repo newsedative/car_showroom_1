@@ -16,7 +16,8 @@ export default {
     createCar(data) {
       console.log(data)
       this.cars.push(data)
-    }
+    },
+
   }
 }
 </script>
