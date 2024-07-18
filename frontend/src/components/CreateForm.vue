@@ -32,7 +32,7 @@
   <div>
     <form class="x-form" @submit.prevent>
       <h3>Добавить автомобиль</h3>
-      <input v-model="car.brand" type="text" placeholder="Бренд" class="x-input">
+      <input v-model="car.brand" type="text" placeholder="Брэнд" class="x-input">
       <input v-model="car.model" type="text" placeholder="Модель" class="x-input">
       <input v-model="car.mileage" type="text" placeholder="Пробег" class="x-input">
       <input v-model="car.year" type="text" placeholder="Год выпуска" class="x-input">
