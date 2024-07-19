@@ -27,10 +27,14 @@ export default {
     }
   },
   computed: {
-    SortedCars() {
+    sortedCars() {
       let newCars;
       newCars = [...this.cars];
-      console.log(this.SelectedSort);
+      if (this.SelectedSort === 'brand') {
+        return newCars.sort((car1, car2) => car1.brand > car2.brand ? -1 : 1)
+      } else {
+        return newCars.sort((car1, car2) => car1.mileage > car2.mileage ? 1 : -1)
+      }
     }
   }
 }
@@ -48,7 +52,7 @@ export default {
       <m-dialog v-model:show="dlgShowOrNot">
         <create-form @create="createCar"></create-form>
       </m-dialog>
-      <cars-list :cars="cars"></cars-list>
+      <cars-list :cars="sortedCars"></cars-list>
     </div>
   </div>
 
