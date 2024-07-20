@@ -9,6 +9,7 @@
       name: "App",
       data() {
         return {
+          id: '',
           brand: '',
           model: '',
           mileage: '',

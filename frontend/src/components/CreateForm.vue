@@ -21,12 +21,9 @@
         createCar() {
             this.car.id = Date.now();
             this.$emit('create', {...this.car});
-            this.car =  {
-              id: '',
-              brand: '',
-              model: '',
-              mileage: '',
-              year: '',
+            const inputgr = document.querySelectorAll('.input-f');
+            for (let el of inputgr) {
+              el.value = '';
             }
         },
       }
@@ -37,10 +34,10 @@
   <div>
     <form class="m-form" @submit.prevent>
       <h3>Добавить автомобиль</h3>
-      <m-input v-model.trim="car.brand" placeholder="Бренд"></m-input>
-      <m-input v-model.trim="car.model" placeholder="Модель"></m-input>
-      <m-input v-model.number="car.mileage" placeholder="Пробег"></m-input>
-      <m-input v-model="car.year" placeholder="Год выпуска"></m-input>
+      <m-input v-model.trim="car.brand" placeholder="Бренд" class="input-f"></m-input>
+      <m-input v-model.trim="car.model" placeholder="Модель" class="input-f"></m-input>
+      <m-input v-model.number="car.mileage" placeholder="Пробег" class="input-f"></m-input>
+      <m-input v-model="car.year" placeholder="Год выпуска" class="input-f"></m-input>
       <m-btn @click="createCar" style="padding: 2%; align-self: flex-end">Добавить</m-btn>
     </form>
   </div>

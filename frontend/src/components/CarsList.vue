@@ -11,11 +11,6 @@ export default {
     }
   },
   name: "CarsList",
-  methods: {
-    deleteCar(index) {
-      this.cars.splice(index, 1)
-    }
-  }
 }
 </script>
 
@@ -37,7 +32,7 @@ export default {
           <td>{{ car.model }}</td>
           <td>{{ car.mileage }}</td>
           <td>{{ car.year }}</td>
-          <td><m-btn @click="deleteCar(index)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-btn></td>
+          <td><m-btn @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-btn></td>
         </tr>
       </table>
     </div>

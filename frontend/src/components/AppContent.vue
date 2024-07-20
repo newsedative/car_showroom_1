@@ -24,6 +24,9 @@ export default {
     },
     dlgShow() {
       this.dlgShowOrNot = true
+    },
+    removeCars(car) {
+      this.cars = this.cars.filter(elem => elem.id !== car.id)
     }
   },
   computed: {
@@ -52,7 +55,7 @@ export default {
       <m-dialog v-model:show="dlgShowOrNot">
         <create-form @create="createCar"></create-form>
       </m-dialog>
-      <cars-list :cars="sortedCars"></cars-list>
+      <cars-list :cars="sortedCars" @remove="removeCars"></cars-list>
     </div>
   </div>
 
