@@ -8,15 +8,6 @@
         AppHeader, AppContent
       },
       name: "App",
-      data() {
-        return {
-          id: '',
-          brand: '',
-          model: '',
-          country: '',
-          price: '',
-        }
-      },
     }
 </script>
 
