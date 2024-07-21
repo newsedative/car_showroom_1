@@ -1,17 +1,17 @@
 <script>
 
-import MBtn from "@/components/UI/MButton.vue";
+  import MBtn from "@/components/UI/MButton.vue";
 
-export default {
-  components: {MBtn},
-  props: {
-    cars: {
-      type: Array,
-      required: true
-    }
-  },
-  name: "CarsList",
-}
+  export default {
+    components: {MBtn},
+    props: {
+      cars: {
+        type: Array,
+        required: true
+      }
+    },
+    name: "CarsList",
+  }
 </script>
 
 <template>
@@ -22,16 +22,16 @@ export default {
           <td>ID</td>
           <td>Brand</td>
           <td>Model</td>
-          <td>Mileage</td>
-          <td>Year</td>
+          <td>Country</td>
+          <td>Price</td>
           <td>Action</td>
         </tr>
         <tr class="car" v-for="(car, index) in cars" :key="car.id">
           <td>{{ car.id }}</td>
           <td>{{ car.brand }}</td>
           <td>{{ car.model }}</td>
-          <td>{{ car.mileage }}</td>
-          <td>{{ car.year }}</td>
+          <td>{{ car.country }}</td>
+          <td>{{ car.price }}</td>
           <td><m-btn @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-btn></td>
         </tr>
       </table>

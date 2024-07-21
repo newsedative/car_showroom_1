@@ -2,6 +2,7 @@
     import AppHeader from "@/components/AppHeader.vue";
     import AppContent from "@/components/AppContent.vue";
 
+
     export default {
       components: {
         AppHeader, AppContent
@@ -12,8 +13,8 @@
           id: '',
           brand: '',
           model: '',
-          mileage: '',
-          year: '',
+          country: '',
+          price: '',
         }
       },
     }

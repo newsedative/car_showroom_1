@@ -12,8 +12,8 @@
             id: '',
             brand: '',
             model: '',
-            mileage: '',
-            year: '',
+            country: '',
+            price: '',
           }
         }
       },
@@ -36,8 +36,8 @@
       <h3>Добавить автомобиль</h3>
       <m-input v-model.trim="car.brand" placeholder="Бренд" class="input-f"></m-input>
       <m-input v-model.trim="car.model" placeholder="Модель" class="input-f"></m-input>
-      <m-input v-model.number="car.mileage" placeholder="Пробег" class="input-f"></m-input>
-      <m-input v-model="car.year" placeholder="Год выпуска" class="input-f"></m-input>
+      <m-input v-model.number="car.country" placeholder="Страна" class="input-f"></m-input>
+      <m-input v-model.number="car.price" placeholder="Стоимость" class="input-f"></m-input>
       <m-btn @click="createCar" style="padding: 2%; align-self: flex-end">Добавить</m-btn>
     </form>
   </div>
