@@ -11,10 +11,14 @@ export default {
   data() {
     return {
       cars: [
-        {id: 1, brand: "Mazda", model: '6 III GJ', mileage: 35000, year: 2023},
+        {id: Date.now(), brand: "Mazda", model: '6 III GJ', mileage: 35000, year: 2023},
       ],
       dlgShowOrNot: false,
       SelectedSort: '',
+      sortOptions: [
+        {value: 'brand', name: 'по названию'},
+        {value: 'mileage', name: 'по пробегу'},
+      ]
     }
   },
   methods: {
@@ -31,13 +35,7 @@ export default {
   },
   computed: {
     sortedCars() {
-      let newCars;
-      newCars = [...this.cars];
-      if (this.SelectedSort === 'brand') {
-        return newCars.sort((car1, car2) => car1.brand > car2.brand ? -1 : 1)
-      } else {
-        return newCars.sort((car1, car2) => car1.mileage > car2.mileage ? 1 : -1)
-      }
+      return [...this.cars].sort((car1, car2) => car1[this.SelectedSort] > car2[this.SelectedSort] ? -1 : 1);
     }
   }
 }
@@ -50,7 +48,7 @@ export default {
         <m-button @click="dlgShow" style="padding: 2%; align-self: flex-end">Добавить</m-button>
       </div>
       <div style="padding-top: 20px">
-        <m-selecter v-model="SelectedSort" ></m-selecter>
+        <m-selecter v-model="SelectedSort" :options="sortOptions"></m-selecter>
       </div>
       <m-dialog v-model:show="dlgShowOrNot">
         <create-form @create="createCar"></create-form>

@@ -1,8 +1,9 @@
 <template>
   <select @change="changeOption">
     <option disabled value="">Выберите из списка</option>
-    <option value="brand">по алфавиту</option>
-    <option value="mileage">по пробегу</option>
+    <option v-for="option in options" :key="option.value" :value="option.value">
+      {{ option.name }}
+    </option>
   </select>
 </template>
 
@@ -12,6 +13,10 @@ export default {
   props: {
     modelValue: {
       type: String,
+    },
+    options: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {
