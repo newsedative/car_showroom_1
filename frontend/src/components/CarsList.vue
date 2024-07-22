@@ -1,17 +1,16 @@
 <script>
+import MButton from "@/components/UI/MButton.vue";
 
-  import MBtn from "@/components/UI/MButton.vue";
-
-  export default {
-    components: {MBtn},
-    props: {
-      cars: {
-        type: Array,
-        required: true
-      }
-    },
-    name: "CarsList",
-  }
+export default {
+  components: {MButton},
+  props: {
+    cars: {
+      type: Array,
+      required: true
+    }
+  },
+  name: "CarsList"
+}
 </script>
 
 <template>
@@ -26,13 +25,13 @@
           <td>Price</td>
           <td>Action</td>
         </tr>
-        <tr class="car" v-for="(car, index) in cars" :key="car.id">
+        <tr class="car" v-for="car in cars" :key="car.id">
           <td>{{ car.id }}</td>
           <td>{{ car.brand }}</td>
           <td>{{ car.model }}</td>
           <td>{{ car.country }}</td>
           <td>{{ car.price }}</td>
-          <td><m-btn @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-btn></td>
+          <td><m-button @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
         </tr>
       </table>
     </div>
@@ -40,7 +39,6 @@
 </template>
 
 <style scoped>
-
 .m-item {
   padding-top: 5px;
   padding-bottom: 5px;

@@ -1,43 +1,38 @@
-<template>
-  <div class="m-dlg" v-if="show" @click.stop="hideDialog">
-    <div @click.stop class="m-dlg-cont">
-      <slot></slot>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
-  name: 'm-dialog',
+  name: "MDialog",
   props: {
-    show: {
+    value: {
       type: Boolean,
       default: false
-    }
-  },
-  methods: {
-    hideDialog() {
-      this.$emit('update:show', false)
     }
   }
 }
 </script>
 
-<style scoped>
-    .m-dlg {
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.5);
-      position: fixed;
-      display: flex;
-    }
+<template>
+<div class="m-dialog" v-if="value===true" @click="$emit('input', false)">
+  <div class="m-dlg-cont" @click.stop>
+    <slot></slot>
+  </div>
+</div>
+</template>
 
-    .m-dlg-cont {
-      margin: auto;
-      border-radius: 8px;
-      padding: 20px;
-    }
+<style scoped>
+.m-dialog {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+}
+
+.m-dlg-cont {
+  margin: auto;
+  border-radius: 8px;
+  padding: 20px;
+}
 
 </style>

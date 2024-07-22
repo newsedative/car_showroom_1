@@ -1,26 +1,25 @@
+<script>
+export default {
+  name: "MButton"
+}
+</script>
+
 <template>
-  <button class="m-btn">
+  <button class="m-button" v-on="$listeners">
     <slot></slot>
   </button>
 </template>
 
-<script>
-export default {
-  name: 'm-button'
-}
-</script>
-
 <style scoped>
-    .m-btn {
-        background-color: #D05353;
-        border: none;
-        color: #191919;
-        padding: 10%;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        border-radius: 0.25rem;
-        font-size: 16px;
-    }
-
+.m-button {
+  background-color: #D05353;
+  border: none;
+  color: #191919;
+  padding: 10%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.25rem;
+  font-size: 16px;
+}
 </style>
