@@ -4,43 +4,27 @@
       <h3>Вход</h3>
       <m-input v-model="username" type="text" placeholder="Имя пользователя"></m-input>
       <m-input v-model="password" type="password" placeholder="Пароль"></m-input>
-      <m-button :loading="loading" @click="form = true"
-            type="submit" style="padding: 2%; align-self: flex-end">Вход</m-button>
+      <m-button @click="loginUser" style="padding: 2%; align-self: flex-end">Вход</m-button>
     </form>
   </div>
 </template>
 
 <script>
-
-import {mapActions} from "vuex";
-export default {
-  name: "loginPage",
-  data() {
-    return {
-      username: null,
-      password: null,
-      loading: false,
-      form: false,
+import { mapActions } from 'vuex'
+    export default {
+        data(){
+            return {
+                username:'',
+                password: '',
+            }
+        },
+        methods:{
+            ...mapActions(['login/login']),
+            loginUser () {
+                this['login/login']({username: this.username, password: this.password, router: this.$router})
+            },
+        }
     }
-  },
-  methods: {
-    ...mapActions(['login/login']),
-    loginUser () {
-      this['login/login']({username: this.username, password: this.password, router: this.$router})
-    },
-    onSubmit () {
-        if (!this.form) return
-
-        this.loading = true
-
-        setTimeout(() => (this.loading = false), 2000)
-        this.loginUser()
-      },
-      required (v) {
-        return !!v || 'Необходимо ввести данные!'
-    },
-  }
-}
 </script>
 
 <style scoped>
