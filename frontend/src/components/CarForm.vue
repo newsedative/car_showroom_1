@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "CreateForm",
+  name: "CarForm",
   data() {
     return {
       car: {

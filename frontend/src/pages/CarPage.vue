@@ -1,11 +1,11 @@
 <script>
-import CreateForm from "@/components/CreateForm.vue";
+import CarForm from "@/components/CarForm.vue";
 import CarsList from "@/components/CarsList.vue";
 import axios from "axios";
 
 export default {
   name: "CarPage",
-  components: {CreateForm, CarsList},
+  components: {CarForm, CarsList},
   data() {
     return {
       cars: [
@@ -58,7 +58,7 @@ export default {
   <div>
     <div class="m-content">
       <m-dialog v-model="dlgShowOrNot">
-        <create-form @create="createCar"></create-form>
+        <car-form @create="createCar"></car-form>
       </m-dialog>
       <div>
         <m-input v-model="searchQuery" placeholder="Поиск..."></m-input>

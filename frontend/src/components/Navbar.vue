@@ -2,13 +2,18 @@
   <div class="navbar">
     <div class="navbar-btns">
       <m-button style="margin-right: 30px" @click="$router.push('/')">Главная</m-button>
-      <m-button @click="$router.push('/cars')">Автомобили</m-button>
+      <m-button @click="$router.push('/cars')" style="margin-right: 30px">Автомобили</m-button>
+      <m-button @click="$router.push('/carpart')" style="margin-right: 30px">Запчасти</m-button>
+      <m-button @click="$router.push('/country')" style="margin-right: 30px">Страны</m-button>
     </div>
   </div>
 </template>
 
 <script>
+import MButton from "@/components/UI/MButton.vue";
+
 export default {
+  components: {MButton}
 }
 </script>
 
