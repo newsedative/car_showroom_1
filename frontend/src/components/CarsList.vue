@@ -25,14 +25,16 @@ export default {
           <td>Price</td>
           <td>Action</td>
         </tr>
-        <tr class="car" v-for="car in cars" :key="car.id">
-          <td>{{ car.id }}</td>
-          <td>{{ car.brand }}</td>
-          <td>{{ car.model }}</td>
-          <td>{{ car.country }}</td>
-          <td>{{ car.price }}</td>
-          <td><m-button @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
-        </tr>
+        <transition-group name="cars-list">
+          <tr class="car" v-for="car in cars" :key="car.id" >
+            <td>{{ car.id }}</td>
+            <td>{{ car.brand }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.country }}</td>
+            <td>{{ car.price }}</td>
+            <td><m-button @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
+          </tr>
+        </transition-group>
       </table>
     </div>
   </div>
@@ -67,4 +69,21 @@ tr {
   justify-content: space-around;
 }
 
+.cars-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.cars-list-enter-active,
+.cars-list-leave-active {
+  transition: all 1s ease;
+}
+.cars-list-enter-from,
+.cars-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.cars-list-move {
+  transition: transform 0.8s ease;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="main-block">
-    <router-view></router-view>
+  <div>
+    <h1>Hello</h1>
   </div>
 </template>
 
@@ -11,7 +11,5 @@ export default {
 </script>
 
 <style scoped>
-.main-block {
-  margin: 0 auto;
-}
+
 </style>
