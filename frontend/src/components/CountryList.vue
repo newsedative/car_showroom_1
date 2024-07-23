@@ -2,12 +2,12 @@
 
 export default {
   props: {
-    carparts: {
+    countries: {
       type: Array,
       required: true
     }
   },
-  name: "PartsList"
+  name: "CountryList"
 }
 </script>
 
@@ -18,19 +18,17 @@ export default {
         <tr>
           <td>ID</td>
           <td>Name</td>
-          <td>Country</td>
-          <td>Description</td>
-          <td>Autos</td>
+          <td>Code</td>
+          <td>Currency</td>
           <td>Action</td>
         </tr>
-        <transition-group name="carparts-list">
-          <tr class="carparts" v-for="carpart in carparts" :key="carpart.id" >
-            <td>{{ carpart.id }}</td>
-            <td>{{ carpart.name }}</td>
-            <td>{{ carpart.country }}</td>
-            <td>{{ carpart.description }}</td>
-            <td>{{ carpart.autos }}</td>
-            <td><m-button @click="$emit('remove', carpart)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
+        <transition-group name="part-list">
+          <tr class="countries" v-for="country in countries" :key="country.id" >
+            <td>{{ country.id }}</td>
+            <td>{{ country.country_name }}</td>
+            <td>{{ country.code }}</td>
+            <td>{{ country.currency }}</td>
+            <td><m-button @click="$emit('remove', country)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
           </tr>
         </transition-group>
       </table>
@@ -71,17 +69,17 @@ tr {
   display: inline-block;
   margin-right: 10px;
 }
-.cars-list-enter-active,
-.cars-list-leave-active {
+.part-list-enter-active,
+.part-list-leave-active {
   transition: all 1s ease;
 }
-.cars-list-enter-from,
-.cars-list-leave-to {
+.part-list-enter-from,
+.part-list-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
 
-.cars-list-move {
+.part-list-move {
   transition: transform 0.8s ease;
 }
 </style>

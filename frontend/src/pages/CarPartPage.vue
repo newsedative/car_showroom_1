@@ -2,10 +2,12 @@
 import PartForm from "@/components/PartForm.vue";
 import PartsList from "@/components/PartsList.vue";
 import axios from "axios";
+import AppHeader from "@/components/AppHeader.vue";
+import Navbar from "@/components/Navbar.vue";
 
 export default {
   name: "CarPartPage",
-  components: {PartForm, PartsList},
+  components: {Navbar, AppHeader, PartForm, PartsList},
   data() {
     return {
       carparts: [
@@ -56,6 +58,10 @@ export default {
 
 <template>
   <div>
+    <div>
+        <app-header></app-header>
+        <navbar></navbar>
+      </div>
     <div class="m-content">
       <m-dialog v-model="dlgShowOrNot">
         <part-form @create="createPart"></part-form>

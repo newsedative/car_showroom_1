@@ -4,6 +4,7 @@ import MainPage from "@/pages/MainPage.vue";
 import CarPage from "@/pages/CarPage.vue";
 import CarPartPage from "@/pages/CarPartPage.vue";
 import CountryPage from "@/pages/CountryPage.vue";
+import LoginPage from "@/pages/LoginPage.vue";
 
 
 Vue.use(VueRouter)
@@ -25,6 +26,10 @@ const routes = [
     {
         path: '/country',
         component: CountryPage
+    },
+    {
+        path: '/login',
+        component: LoginPage
     }
 ]
 

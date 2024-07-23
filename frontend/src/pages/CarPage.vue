@@ -2,10 +2,12 @@
 import CarForm from "@/components/CarForm.vue";
 import CarsList from "@/components/CarsList.vue";
 import axios from "axios";
+import AppHeader from "@/components/AppHeader.vue";
+import Navbar from "@/components/Navbar.vue";
 
 export default {
   name: "CarPage",
-  components: {CarForm, CarsList},
+  components: {Navbar, AppHeader, CarForm, CarsList},
   data() {
     return {
       cars: [
@@ -56,7 +58,12 @@ export default {
 
 <template>
   <div>
+    <div>
+        <app-header></app-header>
+        <navbar></navbar>
+      </div>
     <div class="m-content">
+
       <m-dialog v-model="dlgShowOrNot">
         <car-form @create="createCar"></car-form>
       </m-dialog>
