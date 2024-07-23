@@ -1,32 +1,44 @@
 <template>
   <div class="l-form">
-    <form class="m-form" @submit.prevent>
+    <form class="m-form" @submit.prevent="onSubmit">
       <h3>Вход</h3>
       <m-input v-model="username" type="text" placeholder="Имя пользователя"></m-input>
       <m-input v-model="password" type="password" placeholder="Пароль"></m-input>
-      <m-button style="padding: 2%; align-self: flex-end">Вход</m-button>
+      <m-button :loading="loading" @click="form = true"
+            type="submit" style="padding: 2%; align-self: flex-end">Вход</m-button>
     </form>
   </div>
 </template>
 
 <script>
 
-
-import {toFormData} from "axios";
-
+import {mapActions} from "vuex";
 export default {
-  name: 'login',
+  name: "loginPage",
   data() {
     return {
-      username: '',
-      password: '',
-      incorrectAuth: false
+      username: null,
+      password: null,
+      loading: false,
+      form: false,
     }
   },
   methods: {
-    submitForm(e) {
-      const.toFormData()
-    }
+    ...mapActions(['login/login']),
+    loginUser () {
+      this['login/login']({username: this.username, password: this.password, router: this.$router})
+    },
+    onSubmit () {
+        if (!this.form) return
+
+        this.loading = true
+
+        setTimeout(() => (this.loading = false), 2000)
+        this.loginUser()
+      },
+      required (v) {
+        return !!v || 'Необходимо ввести данные!'
+    },
   }
 }
 </script>
