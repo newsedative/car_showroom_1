@@ -13,7 +13,7 @@ export default {
 <style scoped>
 
 .m-header {
-  margin-left: 30px;
+  margin: 30px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
