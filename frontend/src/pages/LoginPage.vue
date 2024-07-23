@@ -2,8 +2,8 @@
   <div class="l-form">
     <form class="m-form" @submit.prevent>
       <h3>Вход</h3>
-      <m-input type="text" placeholder="Имя пользователя"></m-input>
-      <m-input type="password" placeholder="Пароль"></m-input>
+      <m-input v-model="username" type="text" placeholder="Имя пользователя"></m-input>
+      <m-input v-model="password" type="password" placeholder="Пароль"></m-input>
       <m-button style="padding: 2%; align-self: flex-end">Вход</m-button>
     </form>
   </div>
@@ -11,10 +11,23 @@
 
 <script>
 
-import MButton from "@/components/UI/MButton.vue";
+
+import {toFormData} from "axios";
 
 export default {
-  components: {MButton}
+  name: 'login',
+  data() {
+    return {
+      username: '',
+      password: '',
+      incorrectAuth: false
+    }
+  },
+  methods: {
+    submitForm(e) {
+      const.toFormData()
+    }
+  }
 }
 </script>
 
