@@ -64,7 +64,7 @@ class CarPartViewSet(viewsets.ViewSet):
 
     def post(self, request, *args, **kwargs):
         carpart = request.data
-        serializers = AutoSerializer(data=carpart)
+        serializers = CarPartSerializer(data=carpart)
         if serializers.is_valid(raise_exception=True):
             carparts_saved = serializers.save()
             if request.data.get('country_id'):
@@ -72,7 +72,7 @@ class CarPartViewSet(viewsets.ViewSet):
                 country = get_object_or_404(Country, id=carpart['country_id'])
                 carparts_saved.country = country
                 carparts_saved.save()
-            return Response(AutoSerializer(carparts_saved).data, status=HTTP_201_CREATED)
+            return Response(CarPartSerializer(carparts_saved).data, status=HTTP_201_CREATED)
 
 class CountryListView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
