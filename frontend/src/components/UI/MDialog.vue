@@ -2,17 +2,22 @@
 export default {
   name: "MDialog",
   props: {
-    value: {
+    show: {
       type: Boolean,
       default: false
     }
   },
+  methods: {
+    hideDialog() {
+      this.$emit('update:show', false)
+    }
+  }
 
 }
 </script>
 
 <template>
-<div class="m-dialog" v-if="value===true" @click="$emit('input', false)">
+<div class="m-dialog" v-if="show===true" @click="hideDialog">
   <div class="m-dlg-cont" @click.stop>
     <slot></slot>
   </div>

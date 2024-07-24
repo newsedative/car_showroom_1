@@ -34,6 +34,7 @@ export default {
       }
       this.$ajax.post('api/carpart/', content)
                 .then(response => this.carparts.push({...data, id:response.data.id}))
+      this.dlgShowOrNot = false
     },
     removePart(carpart) {
         this.$ajax.delete(`api/carpart/${carpart.id}/`)
@@ -72,7 +73,7 @@ export default {
         <navbar></navbar>
       </div>
     <div class="m-content">
-      <m-dialog v-model="dlgShowOrNot">
+      <m-dialog :show="dlgShowOrNot">
         <part-form @create="createPart"></part-form>
       </m-dialog>
       <div>
@@ -80,7 +81,7 @@ export default {
       </div>
       <div style="padding-top: 20px">
         <m-button @click="dlgShowOrNot = true" style="padding: 2%; align-self: flex-end">Добавить</m-button>
-        <m-button @click="fetchParts" style="padding: 2%; margin-left:30px">Получить инфу</m-button>
+        <m-button @click="fetchParts" style="padding: 2%; margin-left:30px">Обновить</m-button>
       </div>
       <div style="padding-top: 20px">
         <m-select v-model="selectSort" :options="sortOptions"></m-select>

@@ -1,9 +1,7 @@
 <script>
-import MSelect from "@/components/UI/MSelect.vue";
 
 export default {
   name: "PartForm",
-  components: {MSelect},
   data() {
     return {
       carpart: {

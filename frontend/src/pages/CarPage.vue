@@ -36,6 +36,7 @@ export default {
       console.log(content);
       this.$ajax.post('api/auto/', content)
                 .then(response => this.cars.push({...data, id:response.data.id}))
+      this.dlgShowOrNot = false
     },
     removeCars(car) {
       this.$ajax.delete(`api/auto/${car.id}/`)
@@ -75,7 +76,7 @@ export default {
       </div>
     <div class="m-content">
 
-      <m-dialog v-model="dlgShowOrNot">
+      <m-dialog :show="dlgShowOrNot">
         <car-form @create="createCar"></car-form>
       </m-dialog>
       <div>
@@ -83,7 +84,7 @@ export default {
       </div>
       <div style="padding-top: 20px">
         <m-button @click="dlgShowOrNot = true" style="padding: 2%; align-self: flex-end">Добавить</m-button>
-        <m-button @click="fetchCars" style="padding: 2%; margin-left:30px">Получить инфу</m-button>
+        <m-button @click="fetchCars" style="padding: 2%; margin-left:30px">Обновить</m-button>
       </div>
       <div style="padding-top: 20px">
         <m-select v-model="selectSort" :options="sortOptions"></m-select>

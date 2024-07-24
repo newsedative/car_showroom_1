@@ -26,6 +26,11 @@ class AutoListView(APIView):
         serializers = AutoSerializer(data=car)
         if serializers.is_valid(raise_exception=True):
             cars_saved = serializers.save()
+            if request.data.get('country_id'):
+                car['country_id'] = int(request.data.get('country_id'))
+                country = get_object_or_404(Country, id=car['country_id'])
+                cars_saved.country = country
+                cars_saved.save()
             return Response(AutoSerializer(cars_saved).data, status=HTTP_201_CREATED)
 
 
@@ -58,12 +63,16 @@ class CarPartViewSet(viewsets.ViewSet):
         return Response({'ok': 'success'})
 
     def post(self, request, *args, **kwargs):
-        serializer = CarPartSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            carpart = serializer.save()
-            data = CarPartSerializer(carpart).data
-            return Response(data, status=HTTP_201_CREATED)
-
+        carpart = request.data
+        serializers = AutoSerializer(data=carpart)
+        if serializers.is_valid(raise_exception=True):
+            carparts_saved = serializers.save()
+            if request.data.get('country_id'):
+                carpart['country_id'] = int(request.data.get('country_id'))
+                country = get_object_or_404(Country, id=carpart['country_id'])
+                carparts_saved.country = country
+                carparts_saved.save()
+            return Response(AutoSerializer(carparts_saved).data, status=HTTP_201_CREATED)
 
 class CountryListView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
