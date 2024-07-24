@@ -23,9 +23,7 @@ export default {
     }
   },
   mounted() {
-    this.$ajax.get('api/auto/').then((response) => {
-      this.cars = response.data
-    })
+    this.fetchCars();
   },
   methods: {
     createCar(data) {
@@ -33,6 +31,7 @@ export default {
       this.cars.push(data)
     },
     removeCars(car) {
+      this.$ajax.delete(`api/auto/${car.id}/`)
       this.cars = this.cars.filter(elem => elem.id !== car.id)
     },
     async fetchCars() {

@@ -10,8 +10,6 @@ export default {
   data() {
     return {
       countries: [
-          {id: Date.now(), country_name: 'Россия', code: '+7',
-            currency: 'Рубль'},
         ],
       dlgShowOrNot: false,
       selectSort: '',
@@ -22,13 +20,17 @@ export default {
       searchQuery: '',
     }
   },
+  mounted() {
+    this.fetchCountry();
+  },
   methods: {
     createCountry(data) {
       console.log(data)
       this.countries.push(data)
     },
-    removeCountry(car) {
-        this.countries = this.countries.filter(elem => elem.id !== car.id)
+    removeCountry(country) {
+        this.$ajax.delete(`api/country/${country.id}/`)
+        this.countries = this.countries.filter(elem => elem.id !== country.id)
     },
     async fetchCountry() {
        try {

@@ -7,16 +7,18 @@ from .models import *
 from .serializers import *
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
+
+
 # Create your views here.
 
 
-class AutoView(APIView):
+class AutoListView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request):
         cars = Auto.objects.all()
         serializer = AutoSerializer(cars, many=True)
         return Response(serializer.data)
-
 
     def post(self, request):
         car = request.data.get('cars')
@@ -26,13 +28,22 @@ class AutoView(APIView):
             return Response({'ok': 'success'})
 
 
+class AutoView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk=None):
+        car = get_object_or_404(Auto, pk=pk)
+        car.delete()
+        return Response({'ok': 'success'})
+
+
 class CarPartViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
+
     def list(self, request):
         queryset = CarPart.objects.all()
         serializer = CarPartSerializer(queryset, many=True)
         return Response(serializer.data)
-
 
     def retrive(self, request, pk=None):
         queryset = CarPart.objects.all()
@@ -40,8 +51,13 @@ class CarPartViewSet(viewsets.ViewSet):
         serializer = CarPartSerializer(car_parts)
         return Response(serializer.data)
 
+    def delete(self, request, pk=None):
+        car_part = get_object_or_404(CarPart, pk=pk)
+        car_part.delete()
+        return Response({'ok': 'success'})
 
-class CountryView(generics.ListCreateAPIView):
+
+class CountryListView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
@@ -50,3 +66,14 @@ class CountryView(generics.ListCreateAPIView):
         queryset = self.get_queryset()
         serializer = CountrySerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class CountryView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Country.objects.all()
+    serializer_class = CountrySerializer
+
+    def delete(self, request, pk=None):
+        country = get_object_or_404(Country, pk=pk)
+        country.delete()
+        return Response({'ok': 'success'})

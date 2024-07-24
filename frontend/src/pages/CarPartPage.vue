@@ -10,8 +10,6 @@ export default {
   data() {
     return {
       carparts: [
-          {id: Date.now(), name: 'Двигатель', country: 'Япония',
-            description: 'Мощный 4-цилиндровый двигатель', autos: ''},
         ],
       dlgShowOrNot: false,
       selectSort: '',
@@ -22,12 +20,16 @@ export default {
       searchQuery: '',
     }
   },
+  mounted() {
+    this.fetchParts();
+  },
   methods: {
     createPart(data) {
       console.log(data)
       this.carparts.push(data)
     },
     removePart(carpart) {
+        this.$ajax.delete(`api/carpart/${carpart.id}/`)
         this.carparts = this.carparts.filter(elem => elem.id !== carpart.id)
     },
     async fetchParts() {
