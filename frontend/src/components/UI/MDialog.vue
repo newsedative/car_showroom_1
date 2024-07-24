@@ -1,17 +1,9 @@
 <script>
+import dialogVisible from "@/mixins/dialogVisible";
+
 export default {
   name: "MDialog",
-  props: {
-    show: {
-      type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    hideDialog() {
-      this.$emit('update:show', false)
-    }
-  }
+  mixins: [dialogVisible]
 
 }
 </script>
