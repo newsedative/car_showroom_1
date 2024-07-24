@@ -30,7 +30,7 @@ export const store = {
     actions: {
         async login({commit}, {username, password, router}) {
             try {
-                const response = await axios.post("https://newsedative.pythonanywhere.com/api-token-auth/", {
+                const response = await axios.post("https://nneewday.pythonanywhere.com/api-token-auth/", {
                   'username': username,
                   'password': password,
                 })
