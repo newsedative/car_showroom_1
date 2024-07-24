@@ -4,7 +4,7 @@ export default {
   name: "AppHeader",
   methods:{
     logout() {
-      this.$store.commit('auth/removeToken')
+      this.$store.commit('login/removeToken')
       this.$router.push('/login')
     }
   }
