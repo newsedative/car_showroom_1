@@ -27,9 +27,9 @@ export default {
           <tr class="carparts" v-for="carpart in carparts" :key="carpart.id" >
             <td>{{ carpart.id }}</td>
             <td>{{ carpart.name }}</td>
-            <td>{{ carpart.country }}</td>
+            <td>{{ carpart.country_name }}</td>
             <td>{{ carpart.description }}</td>
-            <td>{{ carpart.autos }}</td>
+            <td>{{ carpart.autos_name }}</td>
             <td><m-button @click="$emit('remove', carpart)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
           </tr>
         </transition-group>

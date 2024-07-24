@@ -27,9 +27,10 @@ export default {
     createPart(data) {
       const content = {
         name: data.name,
-        //country: '',
         description: data.description,
-        autos: []
+        autos: [],
+        autos_names: [],
+        country_id: data.country,
       }
       this.$ajax.post('api/carpart/', content)
                 .then(response => this.carparts.push({...data, id:response.data.id}))

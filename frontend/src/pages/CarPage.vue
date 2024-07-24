@@ -30,9 +30,10 @@ export default {
       const content = {
         car_brand: data.car_brand,
         car_model: data.car_model,
-        country: '',
+        country_id: data.country,
         price: data.price,
       }
+      console.log(content);
       this.$ajax.post('api/auto/', content)
                 .then(response => this.cars.push({...data, id:response.data.id}))
     },
@@ -44,7 +45,6 @@ export default {
       try {
         this.isCarsLoading = true;
         const response = await this.$ajax.get('api/auto/');
-        console.log(response);
         this.cars = response.data;
       } catch (e) {
         alert('error');

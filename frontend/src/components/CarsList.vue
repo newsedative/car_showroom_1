@@ -30,7 +30,7 @@ export default {
             <td>{{ car.id }}</td>
             <td>{{ car.car_brand }}</td>
             <td>{{ car.car_model }}</td>
-            <td>{{ car.country }}</td>
+            <td>{{ car.country_name }}</td>
             <td>{{ car.price }}</td>
             <td><m-button @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
           </tr>

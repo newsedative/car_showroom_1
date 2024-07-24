@@ -20,6 +20,9 @@ class CarPart(models.Model):
     def __str__(self):
         return self.name
 
+    def get_autos_names(self):
+        return [auto.car_brand for auto in self.autos.all()]
+
 
 class Country(models.Model):
     country_name = models.CharField(verbose_name='Название страны', max_length=100)

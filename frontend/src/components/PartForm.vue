@@ -1,6 +1,9 @@
 <script>
+import MSelect from "@/components/UI/MSelect.vue";
+
 export default {
   name: "PartForm",
+  components: {MSelect},
   data() {
     return {
       carpart: {
@@ -8,7 +11,10 @@ export default {
         country: null,
         description: '',
         autos: [],
-      }
+      },
+      countries: [
+          {value: null, name: "Не выбрана"}
+      ],
     }
   },
   methods: {
@@ -17,6 +23,17 @@ export default {
         ...this.carpart
       })
     },
+    async fetchCountry(){
+      const response = await this.$ajax.get('api/country/')
+      let array = response.data
+      console.log(array);
+      array.forEach(element => {
+      this.countries.push({value:element.id, name: element.country_name})
+      });
+    }
+  },
+  created(){
+    this.fetchCountry()
   }
 }
 </script>
@@ -26,7 +43,7 @@ export default {
     <form class="m-form" @submit.prevent>
       <h3>Добавить деталь</h3>
       <m-input v-model="carpart.name" type="text" placeholder="Название"></m-input>
-      <m-input v-model="carpart.country" type="text" placeholder="Страна"></m-input>
+      <m-select v-model="carpart.country" :options="countries"></m-select>
       <m-input v-model="carpart.description" type="text" placeholder="Описание"></m-input>
       <m-input v-model="carpart.autos" type="text" placeholder="Автомобили"></m-input>
       <m-button @click="createPart">
