@@ -25,8 +25,14 @@ export default {
   },
   methods: {
     createPart(data) {
-      console.log(data)
-      this.carparts.push(data)
+      const content = {
+        name: data.name,
+        //country: '',
+        description: data.description,
+        autos: []
+      }
+      this.$ajax.post('api/carpart/', content)
+                .then(response => this.carparts.push({...data, id:response.data.id}))
     },
     removePart(carpart) {
         this.$ajax.delete(`api/carpart/${carpart.id}/`)

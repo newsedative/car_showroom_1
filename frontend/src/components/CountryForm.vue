@@ -13,7 +13,6 @@ export default {
   methods: {
     createCountry() {
       this.$emit('create', {
-        id: Date.now(),
         ...this.country
       })
     },

@@ -25,8 +25,13 @@ export default {
   },
   methods: {
     createCountry(data) {
-      console.log(data)
-      this.countries.push(data)
+      const content = {
+        country_name: data.country_name,
+        code: data.code,
+        currency: data.currency
+      }
+      this.$ajax.post('api/country/', content)
+                .then(response => this.countries.push({...data, id:response.data.id}))
     },
     removeCountry(country) {
         this.$ajax.delete(`api/country/${country.id}/`)

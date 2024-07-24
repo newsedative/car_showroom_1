@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework import generics
@@ -20,12 +21,12 @@ class AutoListView(APIView):
         serializer = AutoSerializer(cars, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
-        car = request.data.get('cars')
+    def post(self, request, *args, **kwargs):
+        car = request.data
         serializers = AutoSerializer(data=car)
         if serializers.is_valid(raise_exception=True):
             cars_saved = serializers.save()
-            return Response({'ok': 'success'})
+            return Response(AutoSerializer(cars_saved).data, status=HTTP_201_CREATED)
 
 
 class AutoView(APIView):
@@ -56,6 +57,13 @@ class CarPartViewSet(viewsets.ViewSet):
         car_part.delete()
         return Response({'ok': 'success'})
 
+    def post(self, request, *args, **kwargs):
+        serializer = CarPartSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            carpart = serializer.save()
+            data = CarPartSerializer(carpart).data
+            return Response(data, status=HTTP_201_CREATED)
+
 
 class CountryListView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
@@ -66,6 +74,13 @@ class CountryListView(generics.ListCreateAPIView):
         queryset = self.get_queryset()
         serializer = CountrySerializer(queryset, many=True)
         return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = CountrySerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            country = serializer.save()
+            data = CountrySerializer(country).data
+            return Response(data, status=HTTP_201_CREATED)
 
 
 class CountryView(generics.ListCreateAPIView):

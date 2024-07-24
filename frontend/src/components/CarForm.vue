@@ -13,9 +13,8 @@ export default {
   },
   methods: {
     createCar() {
-      this.$ajax.post('api/auto/', {...this.car}).then(response=> {
-        const {data} = response
-        this.$emit('create', data)
+      this.$emit('create', {
+        ...this.car
       })
     },
   }
@@ -26,8 +25,8 @@ export default {
   <div>
     <form class="m-form" @submit.prevent>
       <h3>Добавить автомобиль</h3>
-      <m-input v-model="car.brand" type="text" placeholder="Марка"></m-input>
-      <m-input v-model="car.model" type="text" placeholder="Модель"></m-input>
+      <m-input v-model="car.car_brand" type="text" placeholder="Марка"></m-input>
+      <m-input v-model="car.car_model" type="text" placeholder="Модель"></m-input>
       <m-input v-model="car.country" type="text" placeholder="Страна"></m-input>
       <m-input v-model="car.price" type="text" placeholder="Стоимость"></m-input>
       <m-button @click="createCar">

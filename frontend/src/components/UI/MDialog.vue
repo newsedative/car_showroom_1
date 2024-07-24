@@ -13,7 +13,7 @@ export default {
 
 <template>
 <div class="m-dialog" v-if="value===true" @click="$emit('input', false)">
-  <div class="m-dlg-cont" @click.stop="hideDialog">
+  <div class="m-dlg-cont" @click.stop>
     <slot></slot>
   </div>
 </div>

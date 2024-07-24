@@ -5,16 +5,15 @@ export default {
     return {
       carpart: {
         name: '',
-        country: '',
+        country: null,
         description: '',
-        autos: '',
+        autos: [],
       }
     }
   },
   methods: {
     createPart() {
       this.$emit('create', {
-        id: Date.now(),
         ...this.carpart
       })
     },

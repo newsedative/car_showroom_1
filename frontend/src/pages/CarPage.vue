@@ -27,8 +27,14 @@ export default {
   },
   methods: {
     createCar(data) {
-      console.log(data)
-      this.cars.push(data)
+      const content = {
+        car_brand: data.car_brand,
+        car_model: data.car_model,
+        country: '',
+        price: data.price,
+      }
+      this.$ajax.post('api/auto/', content)
+                .then(response => this.cars.push({...data, id:response.data.id}))
     },
     removeCars(car) {
       this.$ajax.delete(`api/auto/${car.id}/`)
