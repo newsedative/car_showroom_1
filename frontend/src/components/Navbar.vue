@@ -1,19 +1,19 @@
 <template>
   <div class="navbar">
     <div class="navbar-btns">
-      <m-button style="margin-right: 30px" @click="$router.push('/')">Главная</m-button>
+      <m-button @click="$router.push('/')"
+                style="margin-right: 30px">Главная
+      </m-button>
       <m-button @click="$router.push('/cars')" style="margin-right: 30px">Автомобили</m-button>
       <m-button @click="$router.push('/carpart')" style="margin-right: 30px">Запчасти</m-button>
-      <m-button @click="$router.push('/country')" style="margin-right: 30px">Страны</m-button>
+      <m-button @click="$router.push('/country')" style="margin-right: 30px" class="current-page">Страны</m-button>
     </div>
   </div>
 </template>
 
 <script>
-import MButton from "@/components/UI/MButton.vue";
 
 export default {
-  components: {MButton}
 }
 </script>
 
@@ -29,6 +29,10 @@ export default {
 }
 .navbar-btns {
   display: flex;
+}
+.current-page {
+  box-shadow: 0 5px 10px 0 #D05353;
+  border: 1px solid;
 }
 
 </style>

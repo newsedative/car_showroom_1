@@ -4,7 +4,9 @@
         <app-header></app-header>
         <navbar></navbar>
       </div>
-    <h1>Hello</h1>
+    <div class="m-content">
+      <h1>Hello</h1>
+    </div>
   </div>
 </template>
 
@@ -19,5 +21,7 @@ export default {
 </script>
 
 <style scoped>
-
+.m-content {
+  margin: 30px;
+}
 </style>
