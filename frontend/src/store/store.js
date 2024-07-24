@@ -30,7 +30,7 @@ export const store = {
     actions: {
         async login({commit}, {username, password, router}) {
             try {
-                const response = await axios.post("https://nneewday.pythonanywhere.com/api-token-auth/", {
+                const response = await axios.post("http://127.0.0.1:8000/api-token-auth/", {
                   'username': username,
                   'password': password,
                 })
@@ -40,6 +40,10 @@ export const store = {
             } catch (error) {
                 alert("Пароль или логин неверны!")
             }
+        },
+        removeToken({commit}){
+            // eslint-disable-next-line no-undef
+            commit('removeToken', state)
         }
     },
 }

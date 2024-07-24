@@ -1,7 +1,6 @@
 <script>
 import PartForm from "@/components/PartForm.vue";
 import PartsList from "@/components/PartsList.vue";
-import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 import Navbar from "@/components/Navbar.vue";
 
@@ -28,14 +27,15 @@ export default {
       console.log(data)
       this.carparts.push(data)
     },
-    removePart(car) {
-        this.carparts = this.carparts.filter(elem => elem.id !== car.id)
+    removePart(carpart) {
+        this.carparts = this.carparts.filter(elem => elem.id !== carpart.id)
     },
     async fetchParts() {
       try {
         this.isPartLoading = true;
-        const response = await axios.get('https://newsedative.pythonanywhere.com/api/carpart/');
+        const response = await this.$ajax.get('api/carpart/');
         console.log(response);
+        this.carparts = response.data;
       } catch (e) {
         alert('error');
       } finally {

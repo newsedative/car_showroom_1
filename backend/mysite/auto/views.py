@@ -11,12 +11,12 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class AutoView(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    #authentication_classes = [SessionAuthentication, BasicAuthentication]
+    #permission_classes = [IsAuthenticated]
     def get(self, request):
         cars = Auto.objects.all()
         serializer = AutoSerializer(cars, many=True)
-        return Response(({'cars': serializer.data}))
+        return Response(serializer.data)
 
 
     def post(self, request):
@@ -28,8 +28,8 @@ class AutoView(APIView):
 
 
 class CarPartViewSet(viewsets.ViewSet):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    #authentication_classes = [SessionAuthentication, BasicAuthentication]
+    #permission_classes = [IsAuthenticated]
     def list(self, request):
         queryset = CarPart.objects.all()
         serializer = CarPartSerializer(queryset, many=True)
@@ -44,8 +44,8 @@ class CarPartViewSet(viewsets.ViewSet):
 
 
 class CountryView(generics.ListCreateAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    #authentication_classes = [SessionAuthentication, BasicAuthentication]
+    #permission_classes = [IsAuthenticated]
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
 

@@ -4,8 +4,8 @@ export default {
   data() {
     return {
       car: {
-        brand: '',
-        model: '',
+        car_brand: '',
+        car_model: '',
         country: '',
         price: '',
       }
@@ -13,9 +13,9 @@ export default {
   },
   methods: {
     createCar() {
-      this.$emit('create', {
-        id: Date.now(),
-        ...this.car
+      this.$ajax.post('api/auto/', {...this.car}).then(response=> {
+        const {data} = response
+        this.$emit('create', data)
       })
     },
   }

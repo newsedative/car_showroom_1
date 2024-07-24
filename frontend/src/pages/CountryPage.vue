@@ -1,7 +1,6 @@
 <script>
 import CountryForm from "@/components/CountryForm.vue";
 import CountryList from "@/components/CountryList.vue";
-import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 import Navbar from "@/components/Navbar.vue";
 
@@ -32,13 +31,16 @@ export default {
         this.countries = this.countries.filter(elem => elem.id !== car.id)
     },
     async fetchCountry() {
-      try {
+       try {
         this.isCountryLoading = true;
-        const response = await axios.get('https://newsedative.pythonanywhere.com/api/country/');
+        const response = await this.$ajax.get('api/country/');
         console.log(response);
+        this.countries = response.data;
       } catch (e) {
         alert('error');
       } finally {
+        // eslint-disable-next-line no-debugger
+        debugger;
         this.isCountryLoading = false;
       }
 

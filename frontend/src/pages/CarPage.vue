@@ -1,7 +1,6 @@
 <script>
 import CarForm from "@/components/CarForm.vue";
 import CarsList from "@/components/CarsList.vue";
-import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 import Navbar from "@/components/Navbar.vue";
 
@@ -11,17 +10,22 @@ export default {
   data() {
     return {
       cars: [
-          {id: Date.now(), brand: "Mazda", model: '6 III GJ', country: 'Япония', price: 5000000},
+
         ],
       dlgShowOrNot: false,
       selectSort: '',
       sortOptions: [
-          {value: 'brand', name: 'по названию'},
+          {value: 'car_brand', name: 'по названию'},
           {value: 'price', name: 'по цене'},
         ],
       isCarsLoading: false,
       searchQuery: '',
     }
+  },
+  mounted() {
+    this.$ajax.get('api/auto/').then((response) => {
+      this.cars = response.data
+    })
   },
   methods: {
     createCar(data) {
@@ -29,16 +33,19 @@ export default {
       this.cars.push(data)
     },
     removeCars(car) {
-        this.cars = this.cars.filter(elem => elem.id !== car.id)
+      this.cars = this.cars.filter(elem => elem.id !== car.id)
     },
     async fetchCars() {
       try {
         this.isCarsLoading = true;
-        const response = await axios.get('https://newsedative.pythonanywhere.com/api/auto/');
+        const response = await this.$ajax.get('api/auto/');
         console.log(response);
+        this.cars = response.data;
       } catch (e) {
         alert('error');
       } finally {
+        // eslint-disable-next-line no-debugger
+        debugger;
         this.isCarsLoading = false;
       }
 
@@ -49,10 +56,9 @@ export default {
         return [...this.cars].sort((car1, car2) => car1[this.selectSort] > car2[this.selectSort] ? -1 : 1);
     },
     sortAndSearchCars() {
-      return this.sortedCars.filter(car => car.brand.toLowerCase().includes(this.searchQuery.toLowerCase()));
+      return this.sortedCars.filter(car => car.car_brand.toLowerCase().includes(this.searchQuery.toLowerCase()));
     }
-
-  }
+  },
 }
 </script>
 

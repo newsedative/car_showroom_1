@@ -5,7 +5,7 @@ import CarPage from "@/pages/CarPage.vue";
 import CarPartPage from "@/pages/CarPartPage.vue";
 import CountryPage from "@/pages/CountryPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
-import store from "@/store"
+//import store from "@/store"
 
 
 Vue.use(VueRouter)
@@ -46,15 +46,14 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
-
-router.beforeEach((to, from, next) => {
-  const token = store.state.login.token;
-  console.log(token);
-  if (to.meta.requiresAuth && !token) {
-      next('/login')
-  } else {
-      next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   const token = store.state.login.token;
+//   console.log(token);
+//   if (to.meta.requiresAuth && !token) {
+//       next('/login')
+//   } else {
+//       next()
+//   }
+// })
 
 export default router;

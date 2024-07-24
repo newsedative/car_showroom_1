@@ -3,7 +3,7 @@ import store from "@/store"
 
 
 const instance = axios.create({
-    baseURL: "https://nneewday.pythonanywhere.com/api"
+    baseURL: "http://127.0.0.1:8000/"
 })
 
 instance.interceptors.request.use((config) => {

@@ -6,13 +6,14 @@ export default {
       type: Boolean,
       default: false
     }
-  }
+  },
+
 }
 </script>
 
 <template>
 <div class="m-dialog" v-if="value===true" @click="$emit('input', false)">
-  <div class="m-dlg-cont" @click.stop>
+  <div class="m-dlg-cont" @click.stop="hideDialog">
     <slot></slot>
   </div>
 </div>

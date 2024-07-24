@@ -67,21 +67,21 @@ tr {
   justify-content: space-around;
 }
 
-.cars-list-item {
+.carparts-list-item {
   display: inline-block;
   margin-right: 10px;
 }
-.cars-list-enter-active,
-.cars-list-leave-active {
+.carparts-list-enter-active,
+.carparts-list-leave-active {
   transition: all 1s ease;
 }
-.cars-list-enter-from,
-.cars-list-leave-to {
+.carparts-list-enter-from,
+.carparts-list-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
 
-.cars-list-move {
+.carparts-list-move {
   transition: transform 0.8s ease;
 }
 </style>

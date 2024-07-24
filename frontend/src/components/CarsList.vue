@@ -28,8 +28,8 @@ export default {
         <transition-group name="cars-list">
           <tr class="car" v-for="car in cars" :key="car.id" >
             <td>{{ car.id }}</td>
-            <td>{{ car.brand }}</td>
-            <td>{{ car.model }}</td>
+            <td>{{ car.car_brand }}</td>
+            <td>{{ car.car_model }}</td>
             <td>{{ car.country }}</td>
             <td>{{ car.price }}</td>
             <td><m-button @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>

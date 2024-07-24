@@ -1,12 +1,20 @@
 <script>
+
 export default {
-  name: "AppHeader"
+  name: "AppHeader",
+  methods:{
+    logout() {
+      this.$store.commit('auth/removeToken')
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
 <template>
   <div class="m-header">
     <strong>Машинова Дарья</strong>
+    <m-button style="padding: 2%; align-self: flex-end" @click="logout" >Выход</m-button>
   </div>
 </template>
 
