@@ -5,6 +5,7 @@ import router from '@/router/router'
 import axios from "@/plugins/axios"
 import store from '@/store'
 import vuetify from './plugins/vuetify'
+import directives from '@/directives'
 
 Vue.config.productionTip = false
 
@@ -12,6 +13,10 @@ Vue.use(axios)
 
 components.forEach(component => {
     Vue.component(component.name, component)
+})
+
+directives.forEach(directive => {
+  Vue.directive(directive.name, directive)
 })
 
 new Vue({
