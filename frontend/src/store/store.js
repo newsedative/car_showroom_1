@@ -30,7 +30,7 @@ export const store = {
     actions: {
         async login({commit}, {username, password, router}) {
             try {
-                const response = await axios.post("http://127.0.0.1:8000/api-token-auth/", {
+                const response = await axios.post("http://51.250.107.34/api-token-auth/", {
                   'username': username,
                   'password': password,
                 })
