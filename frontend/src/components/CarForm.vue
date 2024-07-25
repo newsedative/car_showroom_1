@@ -56,8 +56,8 @@ export default {
   background: #E58F65;
   box-shadow: 0 5px 10px 0 #D05353;
   border-radius: 8px;
-  padding: 1px 10px 10px 10px;
-  margin-top: 15px;
+  padding: 30px;
+  margin: 20px;
   display: flex;
   flex-direction: column;
   color: #191919;

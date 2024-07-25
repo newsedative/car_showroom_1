@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <select :value="value" @change="$emit('input', $event.target.value)">
+  <select :value="value" @change="$emit('input', $event.target.value)" style="border: 1px solid">
     <option disabled value="">Выберите из списка</option>
     <option v-for="option in options"
             :key="option.value"
