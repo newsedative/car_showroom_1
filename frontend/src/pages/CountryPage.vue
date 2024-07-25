@@ -36,10 +36,6 @@ export default {
     },
   },
 
-  created() {
-    this.initialize()
-  },
-
   methods: {
     createCountry() {
       let country = {...this.country}
