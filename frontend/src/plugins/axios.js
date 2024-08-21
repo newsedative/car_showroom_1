@@ -3,7 +3,7 @@ import store from "@/store"
 
 
 const instance = axios.create({
-    baseURL: "http://51.250.107.34:8000/"
+    baseURL: "http://localhost:8000/"
 })
 
 instance.interceptors.request.use((config) => {
