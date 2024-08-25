@@ -1,12 +1,7 @@
 <script>
-// import CountryForm from "@/components/CountryForm.vue";
-// import CountryList from "@/components/CountryList.vue";
-// import AppHeader from "@/components/AppHeader.vue";
-// import Navbar from "@/components/Navbar.vue";
 
 export default {
   name: "CarPartPage",
-  //components: {Navbar, AppHeader, CountryForm, CountryList},
   data() {
     return {
       countries: [],
@@ -21,7 +16,13 @@ export default {
       dialog: false,
       dialogDelete: false,
       desserts: [],
+      editedItem: {
+        country_name: '',
+        code: '',
+        currency: '',
+      },
       editedIndex: -1,
+      currIndex: -1,
       country: {
         country_name: '',
         code: '',
@@ -52,7 +53,28 @@ export default {
       this.$ajax.delete(`api/country/${item.id}/`)
       this.countries = this.countries.filter(elem => elem.id !== item.id)
     },
-
+    editItem(item) {
+      this.editedIndex = 1
+      this.editedItem = item
+      this.country = {country_name: item.country_name, code: item.code, currency: item.currency}
+      this.currIndex = Object.keys(this.countries).find(key => this.countries[key].id === item.id);
+      this.dialog = true
+    },
+    updateChange() {
+      let country = {...this.country}
+      const content = {
+        country_name: country.country_name,
+        code: country.code,
+        currency: country.currency
+      }
+      this.$ajax.put(`api/country/${this.editedItem.id}/`, content)
+          // eslint-disable-next-line no-unused-vars
+          .then(response => this.countries[this.currIndex] = content)
+      this.close()
+      this.$router.go(0);
+      this.editedIndex = -1
+      this.currIndex = -1
+    },
     close() {
       this.dialog = false
       this.$nextTick(() => {
@@ -182,19 +204,35 @@ export default {
                   >
                     Cancel
                   </v-btn>
-                  <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="createCountry"
-                  >
-                    Сохранить
-                  </v-btn>
+                  <div>
+                    <v-btn v-if="editedIndex===-1"
+                        color="blue darken-1"
+                        text
+                        @click="createCountry"
+                    >
+                      Сохранить
+                    </v-btn>
+                    <v-btn v-if="editedIndex===1"
+                        color="blue darken-1"
+                        text
+                        @click="updateChange"
+                    >
+                      Изменить
+                    </v-btn>
+                  </div>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-toolbar>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
+          <v-icon
+            class="me-2"
+            size="small"
+            @click="editItem(item)"
+          >
+            mdi-pencil
+          </v-icon>
           <v-icon
               small
               @click="deleteItem(item)"

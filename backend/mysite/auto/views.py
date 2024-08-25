@@ -101,3 +101,16 @@ class CountryView(generics.ListCreateAPIView):
         country = get_object_or_404(Country, pk=pk)
         country.delete()
         return Response({'ok': 'success'})
+
+    def get(self, request, pk=None):
+        country = get_object_or_404(Country, pk=pk)
+        serializer = CountrySerializer(country)
+        return Response(serializer.data)
+
+    def put(self, request, pk=None):
+        country = get_object_or_404(Country, pk=pk)
+        serializer = CountrySerializer(country, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            data = CountrySerializer(country).data
+            return Response(data, status=HTTP_201_CREATED)
