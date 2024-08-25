@@ -32,7 +32,12 @@ export default {
             <td>{{ car.car_model }}</td>
             <td>{{ car.country_name }}</td>
             <td>{{ car.price }}</td>
-            <td><m-button @click="$emit('remove', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Удалить</m-button></td>
+            <td>
+              <div class="btns">
+                <m-button @click="$emit('remove', car)" style="width: max-content; align-self: flex-end; margin-right: 5px" class="x-btn">Удалить</m-button>
+                <m-button @click="$emit('change', car)" style="width: max-content; align-self: flex-end;" class="x-btn">Изменить</m-button>
+              </div>
+            </td>
           </tr>
         </transition-group>
       </table>
@@ -85,5 +90,9 @@ tr {
 
 .cars-list-move {
   transition: transform 0.8s ease;
+}
+.btns {
+  display: flex;
+  padding: 5px;
 }
 </style>

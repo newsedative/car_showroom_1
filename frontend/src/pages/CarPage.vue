@@ -10,7 +10,6 @@ export default {
   data() {
     return {
       cars: [
-
         ],
       dlgShowOrNot: false,
       selectSort: '',
@@ -20,6 +19,7 @@ export default {
         ],
       isCarsLoading: false,
       searchQuery: '',
+      changeOrN: false
     }
   },
   mounted() {
@@ -41,6 +41,11 @@ export default {
     removeCars(car) {
       this.$ajax.delete(`api/auto/${car.id}/`)
       this.cars = this.cars.filter(elem => elem.id !== car.id)
+    },
+    changeCar(car) {
+      console.log(car)
+      this.changeOrN = true
+      this.dlgShowOrNot = true
     },
     async fetchCars() {
       try {
@@ -83,13 +88,13 @@ export default {
         <m-input v-model="searchQuery" placeholder="Поиск..."></m-input>
       </div>
       <div style="padding-top: 20px">
-        <m-button @click="dlgShowOrNot = true" style="padding: 2%; align-self: flex-end">Добавить</m-button>
+        <m-button @click="dlgShowOrNot = true" style="padding: 2%; align-self: flex-end" :changeOrNot="changeOrN">Добавить</m-button>
         <m-button @click="fetchCars" style="padding: 2%; margin-left:30px">Обновить</m-button>
       </div>
       <div style="padding-top: 20px">
         <m-select v-model="selectSort" :options="sortOptions"></m-select>
       </div>
-      <cars-list :cars="sortAndSearchCars" @remove="removeCars" v-if="!isCarsLoading"></cars-list>
+      <cars-list :cars="sortAndSearchCars" @remove="removeCars" @change="changeCar" v-if="!isCarsLoading"></cars-list>
       <div v-else>Идёт загрузка...</div>
     </div>
   </div>

@@ -1,15 +1,16 @@
 <script>
 
 export default {
-  name: "CountryPageV",
+  name: "CarPageV",
   data() {
     return {
-      countries: [],
+      cars: [],
       headers: [
         {text: 'ID', value: 'id'},
-        {text: 'Название', value: 'country_name'},
-        {text: 'Код', value: 'code', sortable: false,},
-        {text: 'Валюта', value: 'currency', sortable: false,},
+        {text: 'Бренд', value: 'car_brand'},
+        {text: 'Модель', value: 'car_model', sortable: false,},
+        {text: 'Страна', value: 'country', sortable: false,},
+        {text: 'Стоимость', value: 'price', sortable: false,},
         {text: 'Действие', value: 'actions', sortable: false,},
       ],
       search: '',
@@ -17,16 +18,18 @@ export default {
       dialogDelete: false,
       desserts: [],
       editedItem: {
-        country_name: '',
-        code: '',
-        currency: '',
+        car_brand: '',
+        car_model: '',
+        country: null,
+        price: '',
       },
       editedIndex: -1,
       currIndex: -1,
-      country: {
-        country_name: '',
-        code: '',
-        currency: '',
+      car: {
+        car_brand: '',
+        car_model: '',
+        country: null,
+        price: '',
       },
     }
   },
@@ -38,38 +41,42 @@ export default {
   },
 
   methods: {
-    createCountry() {
-      let country = {...this.country}
+    createCar() {
+      let car = {...this.car}
       const content = {
-        country_name: country.country_name,
-        code: country.code,
-        currency: country.currency
+        car_brand: car.car_brand,
+        car_model: car.car_model,
+        country: null,
+        price: car.price,
       }
-      this.$ajax.post('api/country/', content)
-                .then(response => this.countries.push({...country, id:response.data.id}))
+      this.$ajax.post('api/auto/', content)
+                .then(response => this.cars.push({...car, id:response.data.id}))
       this.close()
     },
     deleteItem(item) {
-      this.$ajax.delete(`api/country/${item.id}/`)
-      this.countries = this.countries.filter(elem => elem.id !== item.id)
+      this.$ajax.delete(`api/auto/${item.id}/`)
+      this.cars = this.cars.filter(elem => elem.id !== item.id)
     },
     editItem(item) {
       this.editedIndex = 1
       this.editedItem = item
-      this.country = {country_name: item.country_name, code: item.code, currency: item.currency}
-      this.currIndex = Object.keys(this.countries).find(key => this.countries[key].id === item.id);
+      this.car = {car_brand: item.car_brand, car_model: item.car_model, country: null, price: item.price}
+      this.currIndex = Object.keys(this.cars).find(key => this.cars[key].id === item.id);
       this.dialog = true
+
     },
     updateChange() {
-      let country = {...this.country}
+      let car = {...this.car}
       const content = {
-        country_name: country.country_name,
-        code: country.code,
-        currency: country.currency
+        car_brand: car.car_brand,
+        car_model: car.car_model,
+        country: null,
+        price: car.price,
       }
-      this.$ajax.put(`api/country/${this.editedItem.id}/`, content)
+      console.log(content)
+      this.$ajax.put(`api/auto/${this.editedItem.id}/`, content)
           // eslint-disable-next-line no-unused-vars
-          .then(response => this.countries[this.currIndex] = content)
+          .then(response => this.cars[this.currIndex] = content)
       this.close()
       this.$router.go(0);
       this.editedIndex = -1
@@ -85,18 +92,22 @@ export default {
       this.$store.commit('login/removeToken')
       this.$router.push('/login')
     },
-    async fetchCountry() {
+    async fetchCars() {
        try {
-        const response = await this.$ajax.get('api/country/');
-        console.log(response);
-        this.countries = response.data;
+        this.isCarsLoading = true;
+        const response = await this.$ajax.get('api/auto/');
+        this.cars = response.data;
       } catch (e) {
         alert('error');
+      } finally {
+        // eslint-disable-next-line no-debugger
+        debugger;
+        this.isCarsLoading = false;
       }
     }
   },
   mounted() {
-    this.fetchCountry();
+    this.fetchCars();
   },
 }
 </script>
@@ -134,7 +145,7 @@ export default {
 
       <v-data-table
           :headers="headers"
-          :items="countries"
+          :items="cars"
           class="elevation-1"
           :search="search"
       >
@@ -167,8 +178,8 @@ export default {
                           md="4"
                       >
                         <v-text-field
-                            v-model="country.country_name"
-                            label="Название"
+                            v-model="car.car_brand"
+                            label="Бренд"
                         ></v-text-field>
                       </v-col>
                       <v-col
@@ -177,8 +188,8 @@ export default {
                           md="4"
                       >
                         <v-text-field
-                            v-model="country.code"
-                            label="Код"
+                            v-model="car.car_model"
+                            label="Модель"
                         ></v-text-field>
                       </v-col>
                       <v-col
@@ -187,8 +198,18 @@ export default {
                           md="4"
                       >
                         <v-text-field
-                            v-model="country.currency"
-                            label="Валюта"
+                            v-model="car.country"
+                            label="Страна"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col
+                          cols="12"
+                          sm="6"
+                          md="4"
+                      >
+                        <v-text-field
+                            v-model="car.price"
+                            label="Стоимость"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -208,7 +229,7 @@ export default {
                     <v-btn v-if="editedIndex===-1"
                         color="blue darken-1"
                         text
-                        @click="createCountry"
+                        @click="createCar"
                     >
                       Сохранить
                     </v-btn>

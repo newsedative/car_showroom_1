@@ -42,6 +42,12 @@ class AutoView(APIView):
         car.delete()
         return Response({'ok': 'success'})
 
+    def put(self, request, pk=None):
+        car = get_object_or_404(Auto, pk=pk)
+        serializer = AutoSerializer(car, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=HTTP_201_CREATED)
 
 class CarPartViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
@@ -73,6 +79,13 @@ class CarPartViewSet(viewsets.ViewSet):
                 carparts_saved.country = country
                 carparts_saved.save()
             return Response(CarPartSerializer(carparts_saved).data, status=HTTP_201_CREATED)
+
+    def update(self, request, pk=None):
+        carpart = get_object_or_404(CarPart, pk=pk)
+        serializers = CarPartSerializer(carpart, data=request.data)
+        if serializers.is_valid(raise_exception=True):
+            carparts_saved = serializers.save()
+            return Response(CarPartSerializer(carparts_saved).data)
 
 class CountryListView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]

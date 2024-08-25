@@ -15,11 +15,20 @@ export default {
       ],
     }
   },
+  props: {
+    changeOrNot: {
+      type: Boolean,
+      required: true
+    }
+  },
   methods: {
     createCar() {
       this.$emit('create', {
         ...this.car
       })
+    },
+    updateChange() {
+      console.log(1)
     },
     async fetchCountry(){
       const response = await this.$ajax.get('api/country/')
@@ -44,9 +53,14 @@ export default {
       <m-input v-model="car.car_model" type="text" placeholder="Модель"></m-input>
       <m-select v-model="car.country" :options="countries"></m-select>
       <m-input v-model="car.price" type="text" placeholder="Стоимость"></m-input>
-      <m-button @click="createCar">
-        Добавить
-      </m-button>
+      <div>
+        <m-button @click="createCar" v-if="changeOrNot===false">
+          Добавить
+        </m-button>
+        <m-button @click="updateChange" v-if="changeOrNot">
+          Изменить
+        </m-button>
+      </div>
     </form>
   </div>
 </template>

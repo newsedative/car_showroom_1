@@ -1,10 +1,12 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 import MainPage from "@/pages/MainPage.vue";
-import CarPage from "@/pages/CarPage.vue";
-import CarPartPage from "@/pages/CarPartPage.vue";
+//import CarPage from "@/pages/CarPage.vue";
+//import CarPartPage from "@/pages/CarPartPage.vue";
 import CountryPage from "@/pages/CountryPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
+import CarPageV from "@/pages/CarPageV.vue";
+import CarPartPageV from "@/pages/CarPartPageV.vue";
 import store from "@/store"
 
 
@@ -19,12 +21,12 @@ const routes = [
     },
     {
         path: '/cars',
-        component: CarPage,
+        component: CarPageV,
         meta: {requiresAuth: true}
     },
     {
         path: '/carpart',
-        component: CarPartPage,
+        component: CarPartPageV,
         meta: {requiresAuth: true}
     },
     {
