@@ -5,6 +5,9 @@ export default {
   data() {
     return {
       cars: [],
+      countries: [
+          {value: null, name: "Не выбрана"}
+      ],
       headers: [
         {text: 'ID', value: 'id'},
         {text: 'Бренд', value: 'car_brand'},
@@ -46,7 +49,7 @@ export default {
       const content = {
         car_brand: car.car_brand,
         car_model: car.car_model,
-        country: null,
+        country_id: car.country,
         price: car.price,
       }
       this.$ajax.post('api/auto/', content)
@@ -60,7 +63,7 @@ export default {
     editItem(item) {
       this.editedIndex = 1
       this.editedItem = item
-      this.car = {car_brand: item.car_brand, car_model: item.car_model, country: null, price: item.price}
+      this.car = {car_brand: item.car_brand, car_model: item.car_model, country: item.country, price: item.price}
       this.currIndex = Object.keys(this.cars).find(key => this.cars[key].id === item.id);
       this.dialog = true
 
@@ -70,10 +73,9 @@ export default {
       const content = {
         car_brand: car.car_brand,
         car_model: car.car_model,
-        country: null,
+        country_id: car.country,
         price: car.price,
       }
-      console.log(content)
       this.$ajax.put(`api/auto/${this.editedItem.id}/`, content)
           // eslint-disable-next-line no-unused-vars
           .then(response => this.cars[this.currIndex] = content)
@@ -104,11 +106,21 @@ export default {
         debugger;
         this.isCarsLoading = false;
       }
+    },
+    async fetchCountry(){
+      const response = await this.$ajax.get('api/country/')
+      let array = response.data
+      array.forEach(element => {
+      this.countries.push({value:element.id, name: element.country_name})
+      });
     }
   },
   mounted() {
     this.fetchCars();
   },
+  created() {
+    this.fetchCountry()
+  }
 }
 </script>
 
@@ -197,10 +209,11 @@ export default {
                           sm="6"
                           md="4"
                       >
-                        <v-text-field
-                            v-model="car.country"
-                            label="Страна"
-                        ></v-text-field>
+                        <v-select
+                          v-model="car.country"
+                          label="Страна"
+                          :items="countries"
+                        ></v-select>
                       </v-col>
                       <v-col
                           cols="12"
