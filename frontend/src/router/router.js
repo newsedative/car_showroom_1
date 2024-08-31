@@ -1,12 +1,13 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import MainPage from "@/pages/MainPage.vue";
+//import MainPage from "@/pages/MainPage.vue";
 //import CarPage from "@/pages/CarPage.vue";
 //import CarPartPage from "@/pages/CarPartPage.vue";
 import CountryPage from "@/pages/CountryPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
 import CarPageV from "@/pages/CarPageV.vue";
 import CarPartPageV from "@/pages/CarPartPageV.vue";
+import MainPagwV from "@/pages/MainPagwV.vue";
 import store from "@/store"
 
 
@@ -16,7 +17,7 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        component: MainPage,
+        component: MainPagwV,
         meta: {requiresAuth: true}
     },
     {

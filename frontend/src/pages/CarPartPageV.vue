@@ -5,10 +5,13 @@ export default {
   data() {
     return {
       carparts: [],
+      countries: [
+          {value: null, name: "Не выбрана"}
+      ],
       headers: [
         {text: 'ID', value: 'id'},
         {text: 'Наименование', value: 'name'},
-        {text: 'Страна', value: 'country'},
+        {text: 'Страна', value: 'country_name'},
         {text: 'Описание', value: 'description'},
         {text: 'Автомобили', value: 'autos'},
         {text: 'Действие', value: 'actions'},
@@ -45,13 +48,14 @@ export default {
       let carpart = {...this.carpart}
       const content = {
         name: carpart.name,
-        country: null,
+        country_id: carpart.country,
         description: carpart.description,
         autos: [],
       }
       this.$ajax.post('api/carpart/', content)
                 .then(response => this.carparts.push({...carpart, id:response.data.id}))
       this.close()
+      this.$router.go(0)
     },
     deleteItem(item) {
       this.$ajax.delete(`api/carpart/${item.id}/`)
@@ -60,7 +64,7 @@ export default {
     editItem(item) {
       this.editedIndex = 1
       this.editedItem = item
-      this.carpart = {name: item.name, country: null, description: item.description, autos: []}
+      this.carpart = {name: item.name, country: item.country, description: item.description, autos: []}
       this.currIndex = Object.keys(this.carparts).find(key => this.carparts[key].id === item.id);
       this.dialog = true
 
@@ -69,7 +73,7 @@ export default {
       let carpart = {...this.carpart}
       const content = {
         name: carpart.name,
-        country: null,
+        country_id: carpart.country,
         description: carpart.description,
         autos: [],
       }
@@ -103,11 +107,21 @@ export default {
       } finally {
         this.isPartLoading = false;
       }
+    },
+    async fetchCountry(){
+      const response = await this.$ajax.get('api/country/')
+      let array = response.data
+      array.forEach(element => {
+      this.countries.push({value:element.id, name: element.country_name})
+      });
     }
   },
   mounted() {
-    this.fetchCarParts();
+    this.fetchCarParts()
   },
+  created() {
+    this.fetchCountry()
+  }
 }
 </script>
 
@@ -196,10 +210,13 @@ export default {
                           sm="6"
                           md="4"
                       >
-                        <v-text-field
-                            v-model="carpart.country"
-                            label="Страна"
-                        ></v-text-field>
+                        <v-select
+                          v-model="carpart.country"
+                          label="Страна"
+                          :items="countries"
+                          item-value="value"
+                          item-text="name"
+                        ></v-select>
                       </v-col>
                       <v-col
                           cols="12"

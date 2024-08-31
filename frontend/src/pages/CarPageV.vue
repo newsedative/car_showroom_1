@@ -12,7 +12,7 @@ export default {
         {text: 'ID', value: 'id'},
         {text: 'Бренд', value: 'car_brand'},
         {text: 'Модель', value: 'car_model', sortable: false,},
-        {text: 'Страна', value: 'country', sortable: false,},
+        {text: 'Страна', value: 'country_name', sortable: false,},
         {text: 'Стоимость', value: 'price', sortable: false,},
         {text: 'Действие', value: 'actions', sortable: false,},
       ],
@@ -55,6 +55,7 @@ export default {
       this.$ajax.post('api/auto/', content)
                 .then(response => this.cars.push({...car, id:response.data.id}))
       this.close()
+      this.$router.go(0)
     },
     deleteItem(item) {
       this.$ajax.delete(`api/auto/${item.id}/`)
@@ -213,7 +214,10 @@ export default {
                           v-model="car.country"
                           label="Страна"
                           :items="countries"
+                          item-value="value"
+                          item-text="name"
                         ></v-select>
+
                       </v-col>
                       <v-col
                           cols="12"
